@@ -1,7 +1,9 @@
-import default interface Deck {
-    hand: Card[];
-    fila: Fila<Card>;
-    floors: AbstractFloor[];
-    usedCards: Card[];
+import { CardType, FloorType } from '.';
+import Stack from '../utils/Stack';
 
-} 
+export default interface Deck {
+    hand: CardType.default[];
+    fila: Stack<CardType.default>
+    floors: FloorType.default[];
+    usedCards: CardType.default[];
+}
