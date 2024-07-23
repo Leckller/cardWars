@@ -43,7 +43,7 @@ export default abstract class Card implements CardType.default {
 
   }
 
-  luckAttack(): number {
+  public luckAttack(): number {
     const random = Math.floor(Math.random() * 100);
     if (random > this.luck) {
       return this.damage * 2;
@@ -51,11 +51,11 @@ export default abstract class Card implements CardType.default {
     return this.damage;
   }
 
-  attack(enemy: CardType.default): void {
+  public attack(enemy: CardType.default): void {
     enemy.defend(this.luckAttack());
   }
 
-  defend(damage: number): void {
+  public defend(damage: number): void {
     const random = Math.floor(Math.random() * 100);
     if (this.evade < random) {
       this.life -= damage;

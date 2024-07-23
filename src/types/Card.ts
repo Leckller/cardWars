@@ -16,12 +16,14 @@ export interface CardFields {
   luck: number;
 }
 
-export default interface ACard extends CardFields {
+export default interface Card extends CardMethods, CardFields {}
+
+export interface CardMethods extends CardFields {
   floop(): void;
 
   luckAttack(): number;
 
-  attack(enemy: ACard): void;
+  attack(enemy: Card): void;
 
   defend(damage: number): void;
 }
