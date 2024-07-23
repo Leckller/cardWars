@@ -1,1 +1,1 @@
-export type Elements = 'Terra' | 'Fogo' | 'Água' | 'Ar' | 'Universal';
+export type Elements = 'Terra' | 'Fogo' | 'Agua' | 'Ar' | 'Universal';

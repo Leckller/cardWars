@@ -39,7 +39,7 @@ export default class AProfile implements ProfileType.default {
     useCard(cardIndex: number, floorIndex: number) {
         const card = this.cards.hand[cardIndex];
         const floor = this.getFloorByIndex(floorIndex);
-        if (card.element !== "Universal" && card.type !== floor.type) {
+        if (card.element !== floor.element && card.element !== 'Universal') {
             return "Esta carta não pode ser colocada neste campo."
         }
         if (this.mana < card.cost) {
@@ -51,7 +51,7 @@ export default class AProfile implements ProfileType.default {
         floor.card = card;
         // TIRA DA MÃO E COLOCA O ARRAY DE USADOS
         this.cards.usedCards.push(card);
-        delete this.cards.hand[cardIndex];
+        this.cards.hand = this.cards.hand.filter((_c, i) => i != cardIndex);
     }
 
     getFloorByIndex(floorIndex: number): FloorType.default {
