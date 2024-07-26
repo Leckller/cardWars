@@ -3,15 +3,18 @@ import { GameType, ProfileType } from '../../types';
 import Game from '../../GameClasses/Game';
 import Battle from '../../GameClasses/Battle';
 import Card from '../../types/Card';
+import Finn from '../../GameClasses/Profiles/Finn';
 
 interface GameState {
   game: GameType.default;
-  cards: Card[]
+  cards: Card[];
+  profile: ProfileType.default;
 }
 
 const initialState: GameState = {
   game: new Game(new Battle()),
-  cards: []
+  cards: [],
+  profile: new Finn()
 };
 
 export const GameSlice = createSlice({
@@ -29,9 +32,12 @@ export const GameSlice = createSlice({
       const { cardId, floorIndex } = action.payload;
       state.game.players[0].useCard(cardId, floorIndex);
       state.cards = state.game.players[0].cards.hand;
+    },
+    setProfile(state, action: PayloadAction<ProfileType.default>) {
+      state.profile = action.payload
     }
   },
 });
 
-export const { setPlayers, startGame, useCard } = GameSlice.actions;
+export const { setPlayers, startGame, useCard, setProfile, } = GameSlice.actions;
 export default GameSlice.reducer;

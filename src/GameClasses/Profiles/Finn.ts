@@ -5,6 +5,7 @@ import Stack from "../../utils/Stack";
 import Mendigo from "../Cards/Mendigo";
 import Slime from "../Cards/Slime";
 import { Terra } from "../Floors";
+import FinnImage from '../../../public/finn.png';
 
 export default class Finn extends AProfile.default {
     constructor() {
@@ -35,6 +36,7 @@ export default class Finn extends AProfile.default {
             life: 10,
             level: 1,
             cards: Deck,
+            image: FinnImage
         }
 
         super(Deck, fields);

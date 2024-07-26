@@ -5,6 +5,7 @@ import Stack from "../../utils/Stack";
 import Mendigo from "../Cards/Mendigo";
 import Slime from "../Cards/Slime";
 import { Terra, Universal } from "../Floors";
+import JakeImage from '../../../public/Jake.png'
 
 export default class Jake extends AProfile.default {
     constructor() {
@@ -35,6 +36,7 @@ export default class Jake extends AProfile.default {
             life: 10,
             level: 1,
             cards: Deck,
+            image: JakeImage,
         }
 
         super(Deck, fields);

@@ -5,6 +5,7 @@ export default class AProfile implements ProfileType.default {
     mana: number;
     life: number;
     level: number;
+    image: string;
     maxLife: number;
     cards: DeckType.default;
 
@@ -15,6 +16,7 @@ export default class AProfile implements ProfileType.default {
         this.life = fields.life;
         this.maxLife = fields.life;
         this.level = fields.level;
+        this.image = fields.image;
     }
 
     buyCard() {

@@ -5,6 +5,7 @@ export interface ProfileFields {
     mana: number;
     maxLife: number;
     life: number;
+    image: string;
     level: number;
     cards: DeckType.default;
 }
