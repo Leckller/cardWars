@@ -45,6 +45,10 @@ export default class AProfile implements ProfileType.default {
             console.log("Hmmm acho que você está vendo coisas");
             return;
         }
+        if (floor.card !== null) {
+            console.log("Já tem uma carta neste local")
+            return;
+        }
         if (card.element !== floor.element && card.element !== 'Universal') {
             return "Esta carta não pode ser colocada neste campo."
         }
