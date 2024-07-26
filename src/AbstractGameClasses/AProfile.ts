@@ -5,6 +5,7 @@ export default class AProfile implements ProfileType.default {
     mana: number;
     life: number;
     level: number;
+    maxLife: number;
     cards: DeckType.default;
 
     constructor(Deck: DeckType.default, fields: ProfileType.ProfileFields) {
@@ -12,6 +13,7 @@ export default class AProfile implements ProfileType.default {
         this.name = fields.name;
         this.mana = fields.mana;
         this.life = fields.life;
+        this.maxLife = fields.life;
         this.level = fields.level;
     }
 
@@ -39,6 +41,14 @@ export default class AProfile implements ProfileType.default {
     useCard(cardIndex: number, floorIndex: number) {
         const card = this.cards.hand[cardIndex];
         const floor = this.getFloorByIndex(floorIndex);
+        if (!card) {
+            console.log("Hmmm acho que você está vendo coisas");
+            return;
+        }
+        if (floor.card !== null) {
+            console.log("Já tem uma carta neste local")
+            return;
+        }
         if (card.element !== floor.element && card.element !== 'Universal') {
             return "Esta carta não pode ser colocada neste campo."
         }

@@ -11,6 +11,8 @@ export default abstract class Card implements CardType.default {
 
   image: string;
 
+  maxLife: number;
+
   life: number = 1;
 
   damage: number = 0;
@@ -30,6 +32,7 @@ export default abstract class Card implements CardType.default {
     this.element = fields.element;
     this.name = fields.name;
     this.image = fields.image;
+    this.maxLife = fields.maxLife;
     this.life = fields.life;
     this.damage = fields.damage;
     this.description = fields.description;

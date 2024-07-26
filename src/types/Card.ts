@@ -8,6 +8,7 @@ export interface CardFields {
   name: string;
   image: string;
   life: number;
+  maxLife: number;
   damage: number;
   description: string;
   cost: number;
@@ -16,7 +17,7 @@ export interface CardFields {
   luck: number;
 }
 
-export default interface Card extends CardMethods, CardFields {}
+export default interface Card extends CardMethods, CardFields { }
 
 export interface CardMethods extends CardFields {
   floop(): void;
