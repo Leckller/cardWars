@@ -38,22 +38,25 @@ export default class AProfile implements ProfileType.default {
         card.floop();
     }
 
-    useCard(cardIndex: number, floorIndex: number) {
-        const card = this.cards.hand[cardIndex];
+    useCard(cardId: number, floorIndex: number) {
+        const card = this.cards.hand.find(c => c.id === cardId);
         const floor = this.getFloorByIndex(floorIndex);
+        console.log(card)
         if (!card) {
             console.log("Hmmm acho que você está vendo coisas");
             return;
         }
-        if (floor.card !== null) {
-            console.log("Já tem uma carta neste local")
+        if (floor.card !== undefined) {
+            console.log("Já tem uma carta neste local", this.cards.floors, floorIndex)
             return;
         }
         if (card.element !== floor.element && card.element !== 'Universal') {
-            return "Esta carta não pode ser colocada neste campo."
+            console.log("Esta carta não pode ser colocada neste campo.");
+            return;
         }
         if (this.mana < card.cost) {
-            return "Você não tem mana o suficiente!"
+            console.log("Você não tem mana o suficiente!");
+            return;
         }
         // debita a mana
         this.mana -= card.cost;
@@ -61,7 +64,7 @@ export default class AProfile implements ProfileType.default {
         floor.card = card;
         // TIRA DA MÃO E COLOCA O ARRAY DE USADOS
         this.cards.usedCards.push(card);
-        this.cards.hand = this.cards.hand.filter((_c, i) => i != cardIndex);
+        this.cards.hand = this.cards.hand.filter((c) => c.id != cardId);
     }
 
     getFloorByIndex(floorIndex: number): FloorType.default {
