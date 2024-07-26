@@ -49,6 +49,7 @@ export default abstract class Card implements CardType.default {
 
   }
 
+
   public luckAttack(): number {
     const random = Math.floor(Math.random() * 100);
     if (random > this.luck) {

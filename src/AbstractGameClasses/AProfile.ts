@@ -1,6 +1,8 @@
-import { DeckType, FloorType, ProfileType } from "../types";
+import { Floor } from "../GameClasses/Floors";
+import { DeckType, ElementsType, FloorType, ProfileType } from "../types";
+import Card from "../types/Card";
 
-export default class AProfile implements ProfileType.default {
+export default abstract class AProfile implements ProfileType.default {
     name: string;
     mana: number;
     life: number;
@@ -78,4 +80,27 @@ export default class AProfile implements ProfileType.default {
         this.cards.floors[floorIndex].card = undefined;
     }
 
+    addCard(card: Card): void {
+        if (this.cards.allCards.length > 20) {
+            console.log("Você atingiu o limite de cartas. Remova algumas para adicionar outras.");
+            return;
+        }
+        this.cards.allCards.push(card);
+    }
+
+    removeCard(cardId: number): void {
+        if (this.cards.allCards.length < 8) {
+            console.log("Você precisa ter pelo menos 8 cartas no baralho")
+            return;
+        }
+        this.cards.allCards.filter(c => c.id !== cardId);
+    }
+
+    special(_card?: number): void {
+        console.log("Este personagem não tem nenhum especial")
+    }
+
+    setFloors(element: ElementsType.Elements, floorIndex: number): void {
+        this.cards.floors[floorIndex] = new Floor(element);
+    }
 }

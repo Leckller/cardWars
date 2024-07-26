@@ -6,4 +6,5 @@ export default interface Deck {
     fila: Stack<CardType.default>
     floors: FloorType.default[];
     usedCards: CardType.default[];
+    allCards: CardType.default[];
 }

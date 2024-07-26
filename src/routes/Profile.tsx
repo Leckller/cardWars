@@ -17,6 +17,17 @@ function Profile() {
                     <img className="size-14 rounded-full border-4 border-black" src={profile.image} alt="Profile Icon" />
                 </button>
             </header>
+            <main>
+                <h2>Baralho</h2>
+                <div>
+                    {profile.cards.allCards.map(card => (
+                        <div key={card.id} className="flex flex-row gap-2">
+                            <img className="size-10" src={card.image} alt={card.name} />
+                            <p>{card.name}</p>
+                        </div>
+                    ))}
+                </div>
+            </main>
         </div>
     )
 }
