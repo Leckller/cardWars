@@ -1,4 +1,4 @@
-export default class Stack <T> {
+export default class Stack<T> {
   stack: T[] = [];
 
   enqueue(card: T): void {
@@ -7,5 +7,9 @@ export default class Stack <T> {
 
   dequeue(): T | undefined {
     return this.stack.shift();
+  }
+
+  resetStack(): void {
+    this.stack = [];
   }
 }

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHooks";
+import CardComponent from "../components/CardComponent";
 
 function Profile() {
     const navigate = useNavigate();
@@ -21,10 +22,7 @@ function Profile() {
                 <h2>Baralho</h2>
                 <div>
                     {profile.cards.allCards.map(card => (
-                        <div key={card.id} className="flex flex-row gap-2">
-                            <img className="size-10" src={card.image} alt={card.name} />
-                            <p>{card.name}</p>
-                        </div>
+                        <CardComponent card={card} used={true} />
                     ))}
                 </div>
             </main>
