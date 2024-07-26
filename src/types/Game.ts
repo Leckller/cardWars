@@ -17,6 +17,10 @@ export interface GameMethods {
     resetLifes(): void
 
     playRound(): void
+
+    startGame(): void
+
+    setPlayers(players: [ProfileType.default, ProfileType.default]): void
 }
 
 export default interface Game extends GameFields, GameMethods { }

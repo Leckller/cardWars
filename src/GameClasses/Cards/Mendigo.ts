@@ -11,6 +11,7 @@ export default class Mendigo extends ACard.default {
             cost: 2,
             floopCost: 1,
             life: 3,
+            maxLife: 3,
             damage: 1,
             evade: 10,
             luck: 10,

@@ -3,6 +3,7 @@ import { DeckType, FloorType } from ".";
 export interface ProfileFields {
     name: string;
     mana: number;
+    maxLife: number;
     life: number;
     level: number;
     cards: DeckType.default;

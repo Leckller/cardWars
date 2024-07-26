@@ -3,13 +3,21 @@ import { BattleType, GameType, ProfileType } from "../types";
 export default abstract class Game implements GameType.default {
     // [0] = User; [1] = Enemy;
     turn: 0 | 1 = 0;
-    players: [ProfileType.default, ProfileType.default];
+    players: [ProfileType.default, ProfileType.default] = [] as any;
     battle: BattleType.default;
     turnStage: number = 1;
 
-    constructor(players: [ProfileType.default, ProfileType.default], battle: BattleType.default) {
-        this.players = players;
+    constructor(battle: BattleType.default) {
         this.battle = battle;
+    }
+
+    setPlayers(players: [ProfileType.default, ProfileType.default]): void {
+        this.players = players;
+    }
+
+    startGame(): void {
+        this.resetLifes();
+        this.playRound();
     }
 
     actualTurn() {
@@ -25,8 +33,8 @@ export default abstract class Game implements GameType.default {
     }
 
     resetLifes() {
-        this.players[0].life = 16 * this.players[0].life / 2;
-        this.players[1].life = 16 * this.players[1].life / 2
+        this.players[0].life = this.players[0].maxLife;
+        this.players[1].life = this.players[1].maxLife;
     }
 
     playRound() {
@@ -41,12 +49,18 @@ export default abstract class Game implements GameType.default {
                 }
 
                 if (defendPlayer.life <= 0) {
+                    // Criar metodo para up level
                     attackPlayer.level += defendPlayer.level - attackPlayer.level <= 0 ? 1 : 0.25;
                     console.log(`Vitoria do player ${this.actualTurn()}`)
                     return;
                 }
             }
         }
-        this.toggleTurn();
+        if (this.players[0].life > 0 || this.players[1].life > 0) {
+            this.toggleTurn();
+            this.playRound();
+            return;
+        }
+        console.log('Fim!')
     }
 }

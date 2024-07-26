@@ -11,6 +11,7 @@ export default class Slime extends ACard.default {
             cost: 1,
             floopCost: 1,
             life: 2,
+            maxLife: 2,
             damage: 1,
             evade: 10,
             luck: 10,
