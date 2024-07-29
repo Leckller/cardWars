@@ -1,10 +1,11 @@
 import { ACard } from "../../AbstractGameClasses";
+import MendigoPng from '../../../public/finn.png'
 
 export default class Mendigo extends ACard.default {
     constructor() {
         super({
             name: 'Mendigo',
-            image: '',
+            image: MendigoPng,
             type: 'monster',
             description: 'Um pobre rapaz das ruas do reino doce.',
             element: 'Terra',

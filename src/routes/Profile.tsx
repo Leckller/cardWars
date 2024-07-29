@@ -20,9 +20,9 @@ function Profile() {
             </header>
             <main>
                 <h2>Baralho</h2>
-                <div>
+                <div className="flex flex-row w-full justify-center gap-5 flex-wrap">
                     {profile.cards.allCards.map(card => (
-                        <CardComponent card={card} used={true} />
+                        <CardComponent card={card} used={false} />
                     ))}
                 </div>
             </main>
