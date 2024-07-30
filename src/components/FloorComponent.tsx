@@ -1,16 +1,16 @@
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { useCard } from "../redux/Reducers/Game";
-import { GameType } from "../types";
 import ColorFloor from "../utils/ColorFloor";
 import CardComponent from "./CardComponent";
 
-function FloorComponent({ game, enemy = true }: { game: GameType.default, enemy?: boolean }) {
+function FloorComponent({ isEnemy = true }: { isEnemy?: boolean }) {
     const dispatch = useAppDispatch();
+    const { enemyFloors, playerFloors } = useAppSelector(s => s.Game);
 
-    if (enemy) {
+    if (isEnemy) {
         return (
             <article className='flex flex-row'>
-                {game.players[1]?.cards?.floors.map((f, i) => (
+                {enemyFloors.map((f, i) => (
                     <div
                         key={i}
                         className={`flex flex-row ${ColorFloor(f.element)}`}>
@@ -27,7 +27,7 @@ function FloorComponent({ game, enemy = true }: { game: GameType.default, enemy?
 
     return (
         <article className='flex flex-row'>
-            {game.players[0]?.cards?.floors.map((f, i) => (
+            {playerFloors.map((f, i) => (
                 <div
                     className={`flex flex-row ${ColorFloor(f.element)}`}
                     onDragLeave={(e) => e.preventDefault()}
