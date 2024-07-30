@@ -20,7 +20,7 @@ export default class Jake extends AProfile.default {
         };
 
         const fields: ProfileType.ProfileFields = {
-            name: 'Finn',
+            name: 'Jake',
             maxLife: 10,
             mana: 2,
             life: 10,

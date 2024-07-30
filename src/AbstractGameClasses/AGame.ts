@@ -1,4 +1,4 @@
-import { BattleType, GameType, ProfileType } from "../types";
+import { BattleType, CardType, GameType, ProfileType } from "../types";
 
 export default abstract class Game implements GameType.default {
     // [0] = User; [1] = Enemy;
@@ -11,12 +11,26 @@ export default abstract class Game implements GameType.default {
         this.battle = battle;
     }
 
+    setStandartCards(): void {
+        const player1 = this.players[0]
+        const player2 = this.players[1]
+        if (player1.cards.fila.stack.length <= 8) {
+            player1.setRandomDeck();
+            player1.startGame()
+        }
+        if (player2.cards.fila.stack.length <= 8) {
+            player2.setRandomDeck();
+            player2.startGame()
+        }
+    }
+
     setPlayers(players: [ProfileType.default, ProfileType.default]): void {
         this.players = players;
     }
 
     startGame(): void {
         this.resetLifes();
+        this.setStandartCards();
         this.playRound();
     }
 
@@ -56,11 +70,5 @@ export default abstract class Game implements GameType.default {
                 }
             }
         }
-        if (this.players[0].life > 0 || this.players[1].life > 0) {
-            this.toggleTurn();
-            this.playRound();
-            return;
-        }
-        console.log('Fim!')
     }
 }

@@ -26,7 +26,7 @@ export default abstract class AProfile implements ProfileType.default {
         if (card === undefined) {
             return console.log("Você não possuí cartas para comprar")
         }
-        this.cards.hand.push(card)
+        this.cards.hand = [...this.cards.hand, card]
     }
 
     floop(floorIndex: number) {
@@ -45,7 +45,7 @@ export default abstract class AProfile implements ProfileType.default {
     useCard(cardId: number, floorIndex: number) {
         const card = this.cards.hand.find(c => c.id === cardId);
         const floor = this.getFloorByIndex(floorIndex);
-        console.log(card)
+
         if (!card) {
             console.log("Hmmm acho que você está vendo coisas");
             return;
@@ -71,6 +71,11 @@ export default abstract class AProfile implements ProfileType.default {
         this.cards.hand = this.cards.hand.filter((c) => c.id != cardId);
     }
 
+    startGame(): void {
+        this.buyCard()
+        this.buyCard()
+    }
+
     getFloorByIndex(floorIndex: number): FloorType.default {
         const floor = this.cards.floors[floorIndex];
         return floor;
@@ -94,6 +99,14 @@ export default abstract class AProfile implements ProfileType.default {
             return;
         }
         this.cards.allCards.filter(c => c.id !== cardId);
+    }
+
+    setRandomDeck(): void {
+        for (let i = 0; i <= 7; i++) {
+            const randomNum = Math.floor(Math.random() * this.cards.allCards.length - 1);
+            const index = randomNum < 0 ? 0 : randomNum;
+            this.cards.fila.enqueue(this.cards.allCards[index]);
+        }
     }
 
     special(_card?: number): void {

@@ -22,7 +22,7 @@ function Profile() {
                 <h2>Baralho</h2>
                 <div className="flex flex-row w-full justify-center gap-5 flex-wrap">
                     {profile.cards.allCards.map(card => (
-                        <CardComponent card={card} used={false} />
+                        <CardComponent card={card} key={card.id} used={false} />
                     ))}
                 </div>
             </main>

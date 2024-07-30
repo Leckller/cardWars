@@ -19,8 +19,10 @@ export interface ProfileMethods {
 
     addCard(card: CardType.default): void;
     removeCard(cardId: number): void;
-    special(card?: number): void;
+    setRandomDeck(): void;
+    startGame(): void;
 
+    special(card?: number): void;
     setFloors(element: ElementsType.Elements, floorIndex: number): void;
 }
 
