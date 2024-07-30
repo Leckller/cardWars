@@ -1,46 +1,58 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GameType, ProfileType } from '../../types';
+import { FloorType, GameType, ProfileType } from '../../types';
 import Game from '../../GameClasses/Game';
 import Battle from '../../GameClasses/Battle';
-import Card from '../../types/Card';
 import Finn from '../../GameClasses/Profiles/Finn';
+import Jake from '../../GameClasses/Profiles/Jake';
 
 interface GameState {
   game: GameType.default;
-  cards: Card[];
-  profile: ProfileType.default;
+  player: ProfileType.default;
+  enemy: ProfileType.default;
+  enemyFloors: FloorType.default[],
+  playerFloors: FloorType.default[],
 }
 
 const initialState: GameState = {
   game: new Game(new Battle()),
-  cards: [],
-  profile: new Finn()
+  player: new Finn(),
+  enemy: new Jake(),
+  enemyFloors: [],
+  playerFloors: [],
 };
 
 export const GameSlice = createSlice({
   name: 'Game',
   initialState,
   reducers: {
-    setPlayers(state, action: PayloadAction<[ProfileType.default, ProfileType.default]>) {
-      state.game.players = action.payload;
-      state.cards = action.payload[0].cards.hand
-    },
     startGame(state) {
-      state.game.startGame();
+      const randomPlayer = Math.round(Math.random());
+      const p1 = randomPlayer === 1 ? state.enemy : state.player;
+      const p2 = randomPlayer === 0 ? state.enemy : state.player;
+      state.enemyFloors = state.enemy.cards.floors;
+      state.playerFloors = state.player.cards.floors;
+      state.game.startGame(p1, p2);
     },
     playRound(state) {
-      state.game.playRound();
+      state.game.playRound(state.game.turn ? state.enemy : state.player, !state.game.turn ? state.enemy : state.player);
     },
     useCard(state, action: PayloadAction<{ cardId: number, floorIndex: number }>) {
       const { cardId, floorIndex } = action.payload;
-      state.game.players[0].useCard(cardId, floorIndex);
-      state.cards = state.game.players[0].cards.hand;
+      state.game.turn ?
+        state.enemy.useCard(cardId, floorIndex) :
+        state.player.useCard(cardId, floorIndex)
+
+      state.enemyFloors = state.enemy.cards.floors;
+      state.playerFloors = state.player.cards.floors;
     },
-    setProfile(state, action: PayloadAction<ProfileType.default>) {
-      state.profile = action.payload
+    setPlayer(state, action: PayloadAction<ProfileType.default>) {
+      state.player = action.payload
+    },
+    setEnemy(state, action: PayloadAction<ProfileType.default>) {
+      state.enemy = action.payload
     }
   },
 });
 
-export const { setPlayers, startGame, useCard, setProfile, playRound, } = GameSlice.actions;
+export const { startGame, useCard, playRound, setEnemy, setPlayer, } = GameSlice.actions;
 export default GameSlice.reducer;

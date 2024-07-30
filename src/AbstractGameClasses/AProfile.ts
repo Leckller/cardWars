@@ -98,6 +98,9 @@ export default abstract class AProfile implements ProfileType.default {
     }
 
     startGame(): void {
+        if (this.cards.fila.stack.length < 8) {
+            this.setRandomDeck();
+        }
         this.buyCard()
         this.buyCard()
     }

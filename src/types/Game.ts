@@ -1,28 +1,21 @@
 import { BattleType, ProfileType } from ".";
 
 export interface GameFields {
-    // [0] = User; [1] = Enemy;
-    turn: 0 | 1;
-    players: [ProfileType.default, ProfileType.default];
+    // false = User; true = Enemy;
+    turn: boolean;
     battle: BattleType.default;
 }
 
 export interface GameMethods {
-    actualTurn(): 0 | 1
+    nextTurn(): boolean
 
-    nextTurn(): 0 | 1
+    toggleTurn(nextPlayer: ProfileType.default): void
 
-    toggleTurn(): void
+    options(p1: ProfileType.default, p2: ProfileType.default): void
 
-    resetLifes(): void
+    playRound(attackPlayer: ProfileType.default, defendPlayer: ProfileType.default): void
 
-    playRound(): void
-
-    startGame(): void
-
-    setPlayers(players: [ProfileType.default, ProfileType.default]): void
-
-    setStandartCards(): void
+    startGame(attackPlayer: ProfileType.default, defendPlayer: ProfileType.default): void
 }
 
 export default interface Game extends GameFields, GameMethods { }

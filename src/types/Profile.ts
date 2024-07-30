@@ -13,7 +13,7 @@ export interface ProfileFields {
 export interface ProfileMethods {
     buyCard(): void;
     floop(floorIndex: number): void;
-    useCard(cardIndex: number, floorIndex: number): void;
+    useCard(cardId: number, floorIndex: number): void;
     getFloorByIndex(floorIndex: number): FloorType.default;
     killCard(floorIndex: number): void;
 
@@ -24,6 +24,7 @@ export interface ProfileMethods {
 
     special(card?: number): void;
     setFloors(element: ElementsType.Elements, floorIndex: number): void;
+
 }
 
 export default interface Profile extends ProfileFields, ProfileMethods { }

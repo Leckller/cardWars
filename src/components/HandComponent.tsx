@@ -1,11 +1,10 @@
-import { useAppDispatch } from "../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import { playRound } from "../redux/Reducers/Game";
-import { GameType } from "../types"
 import CardComponent from "./CardComponent"
 
-function HandComponent({ game }: { game: GameType.default }) {
-    const player = game.players[0];
+function HandComponent() {
     const dispatch = useAppDispatch();
+    const { player } = useAppSelector(s => s.Game);
 
     return (
         <article className='flex flex-row'>
@@ -20,7 +19,9 @@ function HandComponent({ game }: { game: GameType.default }) {
             <section className="min-w-[10%] flex flex-col items-center justify-center">
                 <p className="float-left">{player?.mana}</p>
                 <button className="bg-green-700 border-2 border-green-500 size-52"
-                    onClick={() => dispatch(playRound())}>
+                    onClick={() => {
+                        dispatch(playRound());
+                    }}>
                     Battle!
                 </button>
             </section>
