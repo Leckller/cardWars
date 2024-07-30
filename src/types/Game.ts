@@ -21,6 +21,8 @@ export interface GameMethods {
     startGame(): void
 
     setPlayers(players: [ProfileType.default, ProfileType.default]): void
+
+    setStandartCards(): void
 }
 
 export default interface Game extends GameFields, GameMethods { }

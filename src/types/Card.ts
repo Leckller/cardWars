@@ -4,6 +4,7 @@ export type CardType = 'construction' | 'spell' | 'monster';
 
 export interface CardFields {
   type: CardType;
+  id?: number;
   element: Elements;
   name: string;
   image: string;

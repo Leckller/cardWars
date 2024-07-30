@@ -3,10 +3,10 @@ import Main from '../components/Main';
 
 function Home() {
   return (
-    <>
+    <div className='h-screen w-screen overflow-hidden'>
       <Header />
       <Main />
-    </>
+    </div>
   );
 }
 

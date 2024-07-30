@@ -11,6 +11,8 @@ export default abstract class Card implements CardType.default {
 
   image: string;
 
+  id: number;
+
   maxLife: number;
 
   life: number = 1;
@@ -29,6 +31,7 @@ export default abstract class Card implements CardType.default {
 
   constructor(fields: CardType.CardFields) {
     this.type = fields.type;
+    this.id = new Date().getTime() * Math.random();
     this.element = fields.element;
     this.name = fields.name;
     this.image = fields.image;
@@ -45,6 +48,7 @@ export default abstract class Card implements CardType.default {
   public floop(): void {
 
   }
+
 
   public luckAttack(): number {
     const random = Math.floor(Math.random() * 100);

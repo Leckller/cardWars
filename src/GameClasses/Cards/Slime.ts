@@ -1,10 +1,11 @@
 import { ACard } from "../../AbstractGameClasses";
+import SlimePng from '../../../public/Jake.png'
 
 export default class Slime extends ACard.default {
     constructor() {
         super({
             name: 'Slime',
-            image: '',
+            image: SlimePng,
             type: 'monster',
             description: 'Um carinha gosmento... ecati.',
             element: 'Universal',
