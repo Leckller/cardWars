@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { Floor } from "../GameClasses/Floors";
 import { DeckType, ElementsType, FloorType, ProfileType } from "../types";
 import Card from "../types/Card";
@@ -24,7 +25,12 @@ export default abstract class AProfile implements ProfileType.default {
     buyCard() {
         const card = this.cards.fila.dequeue();
         if (card === undefined) {
-            return console.log("Você não possuí cartas para comprar")
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Você não possuí cartas para comprar",
+            });
+            return;
         }
         this.cards.hand = [...this.cards.hand, card]
     }
@@ -32,7 +38,11 @@ export default abstract class AProfile implements ProfileType.default {
     floop(floorIndex: number) {
         const card = this.getFloorByIndex(floorIndex).card;
         if (!card) {
-            console.log("Não é possível realizar o floop sem uma carta em campo");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Não é possível realizar o floop sem uma carta em campo",
+            });
             return;
         }
 
@@ -47,19 +57,35 @@ export default abstract class AProfile implements ProfileType.default {
         const floor = this.getFloorByIndex(floorIndex);
 
         if (!card) {
-            console.log("Hmmm acho que você está vendo coisas");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hmmm acho que você está vendo coisas",
+            });
             return;
         }
         if (floor.card !== undefined) {
-            console.log("Já tem uma carta neste local", this.cards.floors, floorIndex)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Já tem uma carta neste local!`,
+            });
             return;
         }
         if (card.element !== floor.element && card.element !== 'Universal') {
-            console.log("Esta carta não pode ser colocada neste campo.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Esta carta não pode ser colocada neste campo.",
+            });
             return;
         }
         if (this.mana < card.cost) {
-            console.log("Você não tem mana o suficiente!");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Você não tem mana o suficiente!",
+            });
             return;
         }
         // debita a mana
@@ -87,7 +113,11 @@ export default abstract class AProfile implements ProfileType.default {
 
     addCard(card: Card): void {
         if (this.cards.allCards.length > 20) {
-            console.log("Você atingiu o limite de cartas. Remova algumas para adicionar outras.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Você atingiu o limite de cartas. Remova algumas para adicionar outras.",
+            });
             return;
         }
         this.cards.allCards.push(card);
@@ -95,7 +125,11 @@ export default abstract class AProfile implements ProfileType.default {
 
     removeCard(cardId: number): void {
         if (this.cards.allCards.length < 8) {
-            console.log("Você precisa ter pelo menos 8 cartas no baralho")
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Você precisa ter pelo menos 8 cartas no baralho",
+            });
             return;
         }
         this.cards.allCards.filter(c => c.id !== cardId);
@@ -110,7 +144,11 @@ export default abstract class AProfile implements ProfileType.default {
     }
 
     special(_card?: number): void {
-        console.log("Este personagem não tem nenhum especial")
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Este personagem não tem nenhum especial",
+        });
     }
 
     setFloors(element: ElementsType.Elements, floorIndex: number): void {

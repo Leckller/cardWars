@@ -28,6 +28,9 @@ export const GameSlice = createSlice({
     startGame(state) {
       state.game.startGame();
     },
+    playRound(state) {
+      state.game.playRound();
+    },
     useCard(state, action: PayloadAction<{ cardId: number, floorIndex: number }>) {
       const { cardId, floorIndex } = action.payload;
       state.game.players[0].useCard(cardId, floorIndex);
@@ -39,5 +42,5 @@ export const GameSlice = createSlice({
   },
 });
 
-export const { setPlayers, startGame, useCard, setProfile, } = GameSlice.actions;
+export const { setPlayers, startGame, useCard, setProfile, playRound, } = GameSlice.actions;
 export default GameSlice.reducer;

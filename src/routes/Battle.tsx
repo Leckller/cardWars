@@ -5,6 +5,7 @@ import { Maps } from "../utils/Maps";
 import { useEffect } from "react";
 import FloorComponent from "../components/FloorComponent";
 import HandComponent from "../components/HandComponent";
+import PlayerComponent from "../components/PlayerComponent";
 
 function Battle() {
     const { game, profile } = useAppSelector(s => s.Game);
@@ -16,17 +17,21 @@ function Battle() {
     }, [])
 
     return (
-        <div>
-            <section className='flex flex-col'>
-                <h2>Table</h2>
+        <section className="w-screen h-screen">
+            <header className="flex absolute flex-row w-screen justify-between">
+                <PlayerComponent left={false} player={game.players[0]} />
+                <PlayerComponent player={game.players[1]} />
+            </header>
+            <section className='h-[60%] flex flex-col justify-center items-center'>
+                {/* <h2>Table</h2> */}
                 <FloorComponent game={game} />
                 <FloorComponent game={game} enemy={false} />
             </section>
             <section>
-                <h2>Hand</h2>
+                {/* <h2>Hand</h2> */}
                 <HandComponent game={game} />
             </section>
-        </div>
+        </section>
     )
 }
 

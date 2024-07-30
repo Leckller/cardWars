@@ -41,8 +41,8 @@ export default abstract class Game implements GameType.default {
         return this.turn === 0 ? 1 : 0
     }
     toggleTurn() {
-        this.players[this.actualTurn()].mana += this.turnStage;
-        this.turnStage = this.turnStage >= 10 ? 10 : this.turnStage++;
+        this.turnStage += 1
+        this.players[this.actualTurn()].mana = this.turnStage >= 10 ? 10 : this.turnStage;
         this.turn = this.nextTurn();
     }
 
@@ -70,5 +70,6 @@ export default abstract class Game implements GameType.default {
                 }
             }
         }
+        this.toggleTurn();
     }
 }

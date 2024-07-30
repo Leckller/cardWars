@@ -15,7 +15,7 @@ function FloorComponent({ game, enemy = true }: { game: GameType.default, enemy?
                         key={i}
                         className={`flex flex-row ${ColorFloor(f.element)}`}>
                         {f.card === undefined ? (
-                            <div className='border min-w-20 min-h-20'></div>
+                            <div className='border min-w-52 max-w-40 min-h-80'></div>
                         ) : (
                             <CardComponent used={true} card={f.card} />
                         )}
@@ -26,10 +26,10 @@ function FloorComponent({ game, enemy = true }: { game: GameType.default, enemy?
     }
 
     return (
-        <article className='flex flex-row z-0'>
+        <article className='flex flex-row'>
             {game.players[0]?.cards?.floors.map((f, i) => (
                 <div
-                    className={`z-10 flex flex-row ${ColorFloor(f.element)}`}
+                    className={`flex flex-row ${ColorFloor(f.element)}`}
                     onDragLeave={(e) => e.preventDefault()}
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(event) => {
@@ -46,7 +46,7 @@ function FloorComponent({ game, enemy = true }: { game: GameType.default, enemy?
                     key={i}
                 >
                     {f.card === undefined ? (
-                        <div className='border min-w-20 min-h-20'></div>
+                        <div className='border min-w-52 max-w-40 min-h-80'></div>
                     ) : (
                         <CardComponent used={true} card={f.card} />
                     )}
